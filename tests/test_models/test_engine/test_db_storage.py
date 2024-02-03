@@ -174,5 +174,5 @@ class TestDBStorage(unittest.TestCase):
 
     def test_acount_method_wrong_cls(self):
         """Test DBStorage.count with wrong class"""
-        db_instances = models.storage.count("City")
+        db_instances = models.storage.count("CITY")
         self.assertEqual(db_instances, 0)
