@@ -2,15 +2,16 @@
 """
 API app model, version 1
 """
-from models import storage
 from api.v1.views import app_views
 from flask import Flask, jsonify
 from flask_restful import Api, Resource
+from models import storage
 from os import getenv
 
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
 
 @app.teardown_appcontext
 def close_session(err=None):
@@ -20,6 +21,7 @@ def close_session(err=None):
         storage.close()
     except Exception:
         pass
+
 
 @app.errorhandler(404)
 def handle_404(err=None):

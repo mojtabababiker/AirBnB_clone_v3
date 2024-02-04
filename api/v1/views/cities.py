@@ -22,6 +22,7 @@ def cities_by_state(state_id):
         cities_list.append(city.to_dict())
     return jsonify(cities_list)
 
+
 @app_views.get('/cities/<city_id>', strict_slashes=False)
 def cities_get_city(city_id):
     """
@@ -34,6 +35,7 @@ def cities_get_city(city_id):
 
     return jsonify(city.to_dict())
 
+
 @app_views.delete('/cities/<city_id>', strict_slashes=False)
 def cities_delete_city(city_id):
     """
@@ -45,6 +47,7 @@ def cities_delete_city(city_id):
         abort(404)
     storage.delete(city)
     return jsonify(dict()), 200
+
 
 @app_views.post('/states/<state_id>/cities', strict_slashes=False)
 def cities_set_state_city(state_id):
@@ -70,6 +73,7 @@ def cities_set_state_city(state_id):
     city = City(**kwargs)
     city.save()
     return jsonify(city.to_dict()), 201
+
 
 @app_views.put('/cities/<city_id>', strict_slashes=False)
 def cities_update_city(city_id):

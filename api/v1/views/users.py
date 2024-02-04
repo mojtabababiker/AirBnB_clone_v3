@@ -18,6 +18,7 @@ def users_get_all():
 
     return jsonify(users_list)
 
+
 @app_views.get('/users/<user_id>', strict_slashes=False)
 def users_get_user(user_id):
     """
@@ -30,6 +31,7 @@ def users_get_user(user_id):
 
     return jsonify(user.to_dict())
 
+
 @app_views.delete('/users/<user_id>', strict_slashes=False)
 def users_del_user(user_id):
     """
@@ -41,6 +43,7 @@ def users_del_user(user_id):
         abort(404)
     storage.delete(user)
     return jsonify(dict())
+
 
 @app_views.post('/users', strict_slashes=False)
 def users_set_user():
@@ -62,6 +65,7 @@ def users_set_user():
     user = User(**kwargs)
     user.save()
     return jsonify(user.to_dict()), 201
+
 
 @app_views.put('/users/<user_id>', strict_slashes=False)
 def users_update_user(user_id):

@@ -22,6 +22,7 @@ def reviews_by_place(place_id):
         reviews_list.append(review.to_dict())
     return jsonify(reviews_list)
 
+
 @app_views.get('/reviews/<review_id>', strict_slashes=False)
 def reviews_get_review(review_id):
     """
@@ -34,6 +35,7 @@ def reviews_get_review(review_id):
 
     return jsonify(review.to_dict())
 
+
 @app_views.delete('/reviews/<review_id>', strict_slashes=False)
 def reviews_delete_review(review_id):
     """
@@ -45,6 +47,7 @@ def reviews_delete_review(review_id):
         abort(404)
     storage.delete(review)
     return jsonify(dict()), 200
+
 
 @app_views.post('/places/<place_id>/reviews', strict_slashes=False)
 def reviews_set_place_review(place_id):
@@ -76,6 +79,7 @@ def reviews_set_place_review(place_id):
     review = Review(**kwargs)
     review.save()
     return jsonify(review.to_dict()), 201
+
 
 @app_views.put('/reviews/<review_id>', strict_slashes=False)
 def reviews_update_review(review_id):

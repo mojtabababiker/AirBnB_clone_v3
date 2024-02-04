@@ -18,6 +18,7 @@ def amenities_get_all():
 
     return jsonify(amenities_list)
 
+
 @app_views.get('/amenities/<amenity_id>', strict_slashes=False)
 def amenities_get_amenity(amenity_id):
     """
@@ -30,6 +31,7 @@ def amenities_get_amenity(amenity_id):
 
     return jsonify(amenity.to_dict())
 
+
 @app_views.delete('/amenities/<amenity_id>', strict_slashes=False)
 def amenities_del_amenity(amenity_id):
     """
@@ -41,6 +43,7 @@ def amenities_del_amenity(amenity_id):
         abort(404)
     storage.delete(amenity)
     return jsonify(dict())
+
 
 @app_views.post('/amenities', strict_slashes=False)
 def amenities_set_amenity():
@@ -60,6 +63,7 @@ def amenities_set_amenity():
     amenity = Amenity(**kwargs)
     amenity.save()
     return jsonify(amenity.to_dict()), 201
+
 
 @app_views.put('/amenities/<amenity_id>', strict_slashes=False)
 def amenities_update_amenity(amenity_id):

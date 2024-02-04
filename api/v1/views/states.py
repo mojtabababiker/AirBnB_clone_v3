@@ -19,6 +19,7 @@ def states_get_all():
         states.append(state.to_dict())
     return jsonify(states)
 
+
 @app_views.post('/states', strict_slashes=False)
 def states_set_new():
     """
@@ -28,7 +29,7 @@ def states_set_new():
     from models.state import State
     if not request.json:
         return jsonify("Not a JSON"), 400
-    if not 'name' in request.json:
+    if 'name' not in request.json:
         abort(400, description="Missing name")
     try:
         kwargs = request.get_json()
@@ -38,6 +39,7 @@ def states_set_new():
     state = State(**kwargs)
     state.save()
     return jsonify(state.to_dict()), 201
+
 
 @app_views.get('/states/<state_id>', strict_slashes=False)
 def states_get_state(state_id):
@@ -50,6 +52,7 @@ def states_get_state(state_id):
         abort(404)
     return jsonify(state.to_dict())
 
+
 @app_views.delete('/states/<state_id>', strict_slashes=False)
 def states_del_state(state_id):
     """
@@ -61,6 +64,7 @@ def states_del_state(state_id):
         abort(404)
     storage.delete(state)
     return jsonify(dict())
+
 
 @app_views.put('/states/<state_id>', strict_slashes=False)
 def states_update_state(state_id):

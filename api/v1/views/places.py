@@ -22,6 +22,7 @@ def places_get_city_places(city_id):
         places_list.append(place.to_dict())
     return jsonify(places_list)
 
+
 @app_views.get('/places/<place_id>',  strict_slashes=False)
 def places_get_place(place_id):
     """
@@ -33,6 +34,7 @@ def places_get_place(place_id):
         abort(404)
 
     return jsonify(place.to_dict())
+
 
 @app_views.delete('/places/<place_id>', strict_slashes=False)
 def places_del_place(place_id):
@@ -46,6 +48,7 @@ def places_del_place(place_id):
 
     storage.delete(place)
     return jsonify(dict())
+
 
 @app_views.post('/cities/<city_id>/places', strict_slashes=False)
 def places_set_city_places(city_id):
@@ -73,6 +76,7 @@ def places_set_city_places(city_id):
 
     place = Place(**kwargs)
     return jsonify(place.to_dict()), 201
+
 
 @app_views.put('/places/<place_id>', strict_slashes=False)
 def places_update_place(place_id):

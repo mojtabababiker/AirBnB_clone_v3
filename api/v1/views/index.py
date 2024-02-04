@@ -13,13 +13,14 @@ def api_status():
     """
     return jsonify({"status": "OK"})
 
+
 @app_views.route('/state', strict_slashes=False)
 def api_statistics():
     """
     API route returns the count of all instances on
     The database
     """
-    stats = {"amenities": "Amenity", "cities": "City", "places": "Place", 
+    stats = {"amenities": "Amenity", "cities": "City", "places": "Place",
              "reviews": "Review", "states": "State", "users": "User"}
 
     for key, val in stats.items():
