@@ -12,7 +12,7 @@ def users_get_all():
     """
     API route to retrive all users instances from database
     """
-    from ..app import storage
+    from api.v1.app import storage
     users = storage.all('User')
     users_list = []
     for user in users.values():
@@ -27,7 +27,7 @@ def users_get_user(user_id):
     API route to rerive user instance from database with
     the id user_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     user = storage.get("User", user_id)
     if not user:
         abort(404)
@@ -41,7 +41,7 @@ def users_del_user(user_id):
     API route to delete user instance from database with
     the is user_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     user = storage.get("User", user_id)
     if not user:
         abort(404)
@@ -54,7 +54,7 @@ def users_set_user():
     """
     API route to set a new instance of user
     """
-    from ..app import storage
+    from api.v1.app import storage
     from models.user import User
 
     if not request.json:
@@ -78,7 +78,7 @@ def users_update_user(user_id):
     API route to update user instance on the database with
     id user_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     if not request.json:
         abort(400, description="Not a JSON")
     try:
