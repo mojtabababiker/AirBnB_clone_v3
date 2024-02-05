@@ -20,7 +20,7 @@ def api_statistics():
     API route returns the count of all instances on
     The database
     """
-    from ..app import storage
+    from api.v1.app import storage
     stats = {"amenities": "Amenity", "cities": "City", "places": "Place",
              "reviews": "Review", "states": "State", "users": "User"}
 
