@@ -11,7 +11,8 @@ env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_pack():
-    """generates a tgz archive"""
+    """generates a tgz archive to be ready for deploing to the
+    web servers"""
     try:
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         if isdir("versions") is False:
@@ -24,7 +25,8 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """distributes an archive to the web servers"""
+    """distributes an archive to the web
+    servers using fabric module"""
     if exists(archive_path) is False:
         return False
     try:
@@ -45,7 +47,8 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """creates and distributes an archive to the web servers"""
+    """creates and distributes an archive to the web servers
+    and deploying them using fabric module"""
     archive_path = do_pack()
     if archive_path is None:
         return False

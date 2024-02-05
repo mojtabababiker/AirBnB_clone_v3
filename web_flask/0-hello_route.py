@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def index():
-    """returns Hello HBNB!"""
+    """test route returns Hello HBNB!"""
     return 'Hello HBNB!'
 
 

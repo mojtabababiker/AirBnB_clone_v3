@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Contains the class DBStorage"""
+Contains the class DBStorage
+"""
 
 import models
 from models.amenity import Amenity
@@ -21,12 +22,17 @@ classes = {"Amenity": Amenity, "City": City, "Place": Place,
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """
+    interaacts with the MySQL database and provides all the
+    methods needed
+    """
     __engine = None
     __session = None
 
     def __init__(self):
-        """Instantiate a DBStorage object"""
+        """
+        Instantiate a DBStorage object and conneect to the database
+        """
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
@@ -73,31 +79,44 @@ class DBStorage:
         return (new_dict)
 
     def new(self, obj):
-        """add the object to the current database session"""
+        """
+        add the object to the current database session
+        """
         self.__session.add(obj)
 
     def save(self):
-        """commit all changes of the current database session"""
+        """
+        commit all changes of the current database session
+        """
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from the current database session obj if not None"""
+        """
+        delete from the current database session obj if not None
+        """
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """reloads data from the database"""
+        """
+        query the data from the database to the current
+        self.__session
+        """
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session()
 
     def close(self):
-        """call remove() method on the private session attribute"""
+        """
+        call remove() method on the private session attribute and
+        forse all changes
+        """
         self.__session.remove()
 
     def get(self, cls, id):
-        """A method to retrieve one object from the dataabse with
+        """
+        A method to retrieve one object from the dataabse with
         the class cls and id id
         """
         try:
@@ -110,7 +129,8 @@ class DBStorage:
             return None
 
     def count(self, cls=None):
-        """method to count the number of objects in storage
+        """
+        method to count the number of objects in storage
         or instance of the class cls"""
         all_obj = self.all(cls)
         if cls in classes.values():
