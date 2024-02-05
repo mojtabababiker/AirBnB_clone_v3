@@ -2,7 +2,7 @@
 """
 API /status route for version v1
 """
-from api.v1.views import app_views, storage
+from api.v1.views import app_views
 from flask import jsonify
 
 
@@ -14,12 +14,13 @@ def api_status():
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/state', strict_slashes=False)
+@app_views.route('/stats', strict_slashes=False)
 def api_statistics():
     """
     API route returns the count of all instances on
     The database
     """
+    from ..app import storage
     stats = {"amenities": "Amenity", "cities": "City", "places": "Place",
              "reviews": "Review", "states": "State", "users": "User"}
 

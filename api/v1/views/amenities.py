@@ -2,8 +2,9 @@
 """
 API /amenities route for version v1
 """
-from api.v1.views import app_views, storage
-from flask import jsonify, abort
+# from api.v1.views import app_views, storage
+from api.v1.views import app_views
+from flask import jsonify, abort, request
 
 
 @app_views.get('/amenities', strict_slashes=False)
@@ -11,7 +12,8 @@ def amenities_get_all():
     """
     API route to retrive all amenities instances from database
     """
-    amenities = stroage.all('Amenity')
+    from ..app import storage
+    amenities = storage.all('Amenity')
     amenities_list = []
     for amenity in amenities.values():
         amenities_list.append(amenity.to_dict())
@@ -25,6 +27,7 @@ def amenities_get_amenity(amenity_id):
     API route to rerive amenity instance from database with
     the id amenity_id
     """
+    from ..app import storage
     amenity = storage.get("Amenity", amenity_id)
     if not amenity:
         abort(404)
@@ -38,7 +41,8 @@ def amenities_del_amenity(amenity_id):
     API route to delete amenity instance from database with
     the is amenity_id
     """
-    amenity = stroage.get("Amenity", amenity_id)
+    from ..app import storage
+    amenity = storage.get("Amenity", amenity_id)
     if not amenity:
         abort(404)
     storage.delete(amenity)
@@ -50,6 +54,7 @@ def amenities_set_amenity():
     """
     API route to set a new instance of amenity
     """
+    from ..app import storage
     from models.amenity import Amenity
 
     if not request.json:
@@ -71,6 +76,7 @@ def amenities_update_amenity(amenity_id):
     API route to update amenity instance on the database with
     id amenity_id
     """
+    from ..app import storage
     if not request.json:
         abort(400, description="Not a JSON")
     try:

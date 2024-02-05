@@ -2,8 +2,9 @@
 """
 API /places route for version v1
 """
-from api.v1.views import app_views, storage
-from flask import jsonify, abort
+# from api.v1.views import app_views, storage
+from api.v1.views import app_views
+from flask import jsonify, abort, request
 
 
 @app_views.get('/cities/<city_id>/places', strict_slashes=False)
@@ -12,6 +13,7 @@ def places_get_city_places(city_id):
     API route to retrive all places instance on the city with
     id city_id form database
     """
+    from ..app import storage
     city = storage.get("City", city_id)
     if not city:
         abort(404)
@@ -29,6 +31,7 @@ def places_get_place(place_id):
     API to retirve a place instance from the database with
     the id place_id
     """
+    from ..app import storage
     place = storage.get("Place", place_id)
     if not place:
         abort(404)
@@ -42,6 +45,7 @@ def places_del_place(place_id):
     API to delete a place instance from the database with
     the id place_id
     """
+    from ..app import storage
     place = storage.get("Place", place_id)
     if not place:
         abort(404)
@@ -56,6 +60,7 @@ def places_set_city_places(city_id):
     API route to add a new place instance on the city with
     id city_id to database
     """
+    from ..app import storage
     from models.place import Place
     if not request.json:
         abort(400, description="Not a JSON")
@@ -84,6 +89,7 @@ def places_update_place(place_id):
     API route to update place instance with
     id place_id on database
     """
+    from ..app import storage
     from models.place import Place
     if not request.json:
         abort(400, description="Not a JSON")

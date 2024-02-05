@@ -2,8 +2,9 @@
 """
 API /reviews route for version v1
 """
-from api.v1.views import app_views, storage
-from flask import jsonify, abort
+# from api.v1.views import app_views, storage
+from api.v1.views import app_views
+from flask import jsonify, abort, request
 
 
 @app_views.get('/places/<place_id>/reviews', strict_slashes=False)
@@ -12,6 +13,7 @@ def reviews_by_place(place_id):
     API route to retirve all reviews instance that belong to
     place with place_id
     """
+    from ..app import storage
     place = storage.get("Place", place_id)
     if not place:
         abort(404)
@@ -29,6 +31,7 @@ def reviews_get_review(review_id):
     API route to retrive review instance from the database
     with the id review_id
     """
+    from ..app import storage
     review = storage.get("Review", review_id)
     if not review:
         abort(404)
@@ -42,6 +45,7 @@ def reviews_delete_review(review_id):
     API route to delete review instance from the database
     with the id review_id
     """
+    from ..app import storage
     review = storage.get("Review", review_id)
     if not review:
         abort(404)
@@ -55,6 +59,7 @@ def reviews_set_place_review(place_id):
     API route to set a new review instance to the database under
     the place with the id place_id
     """
+    from ..app import storage
     from models.review import Review
 
     if not request.json:
@@ -87,6 +92,7 @@ def reviews_update_review(review_id):
     API route to update a review instance from the database under
     the id review_id
     """
+    from ..app import storage
     if not request.json:
         abort(400, description="Not a JSON")
     try:
