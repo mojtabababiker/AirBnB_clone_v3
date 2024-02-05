@@ -3,6 +3,7 @@
 API /status route for version v1
 """
 from api.v1.views import app_views
+from api.v1.app import storage
 from flask import jsonify
 
 
@@ -20,7 +21,6 @@ def api_statistics():
     API route returns the count of all instances on
     The database
     """
-    from api.v1.app import storage
     stats = {"amenities": "Amenity", "cities": "City", "places": "Place",
              "reviews": "Review", "states": "State", "users": "User"}
 
