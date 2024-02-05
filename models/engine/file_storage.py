@@ -2,18 +2,18 @@
 """
 Contains the FileStorage class
 """
+import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
-import json
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
 
 
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {"Amenity": Amenity, "City": City, "Place": Place,
+           "Review": Review, "State": State, "User": User}
 
 
 class FileStorage:
@@ -70,7 +70,8 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """A method to retrieve one object"""
+        """A method to retrieve one object" from database that have
+        the id id and class cls"""
         if isinstance(id, str) and cls in classes.values():
             all_obj = self.all(cls)
             for k, v in all_obj.items():
@@ -79,7 +80,8 @@ class FileStorage:
         return None
 
     def count(self, cls=None):
-        """method to count the number of objects in storage"""
+        """method to count the number of objects in storage
+        or the instance of the class cls"""
         all_obj = self.all(cls)
         if cls in classes.values():
             all_obj = self.all(cls)

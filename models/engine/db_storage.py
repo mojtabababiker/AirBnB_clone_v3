@@ -16,8 +16,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 
-classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {"Amenity": Amenity, "City": City, "Place": Place,
+           "Review": Review, "State": State, "User": User}
 
 
 class DBStorage:
@@ -77,16 +77,18 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """A method to retrieve one object"""
-        if isinstance(id, str) and cls in classes.values():
+        """A method to retrieve one object from the dataabse with
+        the class cls and id id"""
+        if id and type(id) is str and cls in classes.values():
             all_obj = self.all(cls)
-            for k, v in all_obj.items():
-                if k.split(".")[1] == id:
-                    return v
+            for key, val in all_obj.items():
+                if key.split(".")[1] == id:
+                    return val
         return None
 
     def count(self, cls=None):
-        """method to count the number of objects in storage"""
+        """method to count the number of objects in storage
+        or instance of the class cls"""
         all_obj = self.all(cls)
         if cls in classes.values():
             all_obj = self.all(cls)
