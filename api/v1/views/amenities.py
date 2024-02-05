@@ -2,7 +2,6 @@
 """
 API /amenities route for version v1
 """
-# from api.v1.views import app_views, storage
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 
@@ -12,7 +11,7 @@ def amenities_get_all():
     """
     API route to retrive all amenities instances from database
     """
-    from ..app import storage
+    from api.v1.app import storage
     amenities = storage.all('Amenity')
     amenities_list = []
     for amenity in amenities.values():
@@ -27,7 +26,7 @@ def amenities_get_amenity(amenity_id):
     API route to rerive amenity instance from database with
     the id amenity_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     amenity = storage.get("Amenity", amenity_id)
     if not amenity:
         abort(404)
@@ -41,7 +40,7 @@ def amenities_del_amenity(amenity_id):
     API route to delete amenity instance from database with
     the is amenity_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     amenity = storage.get("Amenity", amenity_id)
     if not amenity:
         abort(404)
@@ -54,7 +53,7 @@ def amenities_set_amenity():
     """
     API route to set a new instance of amenity
     """
-    from ..app import storage
+    from api.v1.app import storage
     from models.amenity import Amenity
 
     if not request.json:
@@ -76,7 +75,7 @@ def amenities_update_amenity(amenity_id):
     API route to update amenity instance on the database with
     id amenity_id
     """
-    from ..app import storage
+    from api.v1.app import storage
     if not request.json:
         abort(400, description="Not a JSON")
     try:
