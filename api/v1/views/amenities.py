@@ -14,7 +14,7 @@ def amenities_get_all():
     from api.v1.app import storage
     amenities = storage.all('Amenity')
     amenities_list = []
-    for amenity in amenities.values():
+    for amenity in amenities:
         amenities_list.append(amenity.to_dict())
 
     return jsonify(amenities_list)
@@ -58,7 +58,7 @@ def amenities_set_amenity():
     from api.v1.app import storage
     from models.amenity import Amenity
 
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description='Not a JSON')
     if 'name' not in request.json:
         abort(400, description='Missing name')
@@ -79,7 +79,7 @@ def amenities_update_amenity(amenity_id):
     id amenity_id
     """
     from api.v1.app import storage
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     try:
         kwargs = request.get_json()

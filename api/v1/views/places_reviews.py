@@ -64,7 +64,7 @@ def reviews_set_place_review(place_id):
     from api.v1.app import storage
     from models.review import Review
 
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     if 'user_id' not in request.json:
         abort(400, description="Missing user_id")
@@ -96,7 +96,7 @@ def reviews_update_review(review_id):
     the id review_id
     """
     from api.v1.app import storage
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     try:
         kwargs = request.get_json()

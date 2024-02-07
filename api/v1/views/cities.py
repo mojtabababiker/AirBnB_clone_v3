@@ -69,7 +69,7 @@ def cities_set_state_city(state_id):
     state = storage.get("State", state_id)
     if not state:
         abort(404)
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     if 'name' not in request.json:
         abort(400, description="Missing name")
@@ -92,7 +92,7 @@ def cities_update_city(city_id):
     the id city_id
     """
     from api.v1.app import storage
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     try:
         kwargs = request.get_json()

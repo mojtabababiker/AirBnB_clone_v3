@@ -20,7 +20,8 @@ def places_get_city_places(city_id):
     places = city.places
     places_list = []
 
-    for place in places.values():
+    print(places)
+    for place in places:
         places_list.append(place.to_dict())
     return jsonify(places_list)
 
@@ -64,7 +65,7 @@ def places_set_city_places(city_id):
     """
     from api.v1.app import storage
     from models.place import Place
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     if "user_id" not in request.json:
         abort(400, description="Missing user_id")
@@ -78,7 +79,8 @@ def places_set_city_places(city_id):
     kwargs["city_id"] = city_id
 
     city = storage.get("City", city_id)
-    if not city:
+    user = storage.get("User", kwargs["user_id"])
+    if not city or not user:
         abort(404)
 
     place = Place(**kwargs)
@@ -94,7 +96,8 @@ def places_update_place(place_id):
     """
     from api.v1.app import storage
     from models.place import Place
-    if not request.json:
+
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
 
     try:

@@ -31,7 +31,7 @@ def states_set_new():
     """
     from api.v1.app import storage
     from models.state import State
-    if not request.json:
+    if request.content_type != 'application/json':
         return jsonify("Not a JSON"), 400
     if 'name' not in request.json:
         abort(400, description="Missing name")
@@ -86,7 +86,7 @@ def states_update_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     try:
         kwargs = request.get_json()

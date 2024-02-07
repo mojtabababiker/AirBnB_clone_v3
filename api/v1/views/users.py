@@ -59,7 +59,7 @@ def users_set_user():
     from api.v1.app import storage
     from models.user import User
 
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description='Not a JSON')
     if 'email' not in request.json:
         abort(400, description='Missing email')
@@ -82,7 +82,7 @@ def users_update_user(user_id):
     id user_id
     """
     from api.v1.app import storage
-    if not request.json:
+    if request.content_type != 'application/json':
         abort(400, description="Not a JSON")
     try:
         kwargs = request.get_json()
