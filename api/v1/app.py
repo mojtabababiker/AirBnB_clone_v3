@@ -36,7 +36,7 @@ def handle_404(err=None):
 
 if __name__ == "__main__":
     """If we this module called directly run it on
-    the provided host and port, 
+    the provided host and port,
     default to 0.0.0.0:5000
     """
     host = getenv('HBNB_API_HOST', '0.0.0.0')

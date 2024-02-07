@@ -86,7 +86,7 @@ def places_set_city_places(city_id):
 
 
 @app_views.route('/places/<place_id>', strict_slashes=False,
-               methods=["PUT"])
+                 methods=["PUT"])
 def places_update_place(place_id):
     """
     API route to update place instance with

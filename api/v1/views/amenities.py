@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 API /amenities route for version v1
@@ -51,7 +50,7 @@ def amenities_del_amenity(amenity_id):
 
 
 @app_views.route('/amenities', strict_slashes=False,
-                methods=["POST"])
+                 methods=["POST"])
 def amenities_set_amenity():
     """
     API route to set a new instance of amenity

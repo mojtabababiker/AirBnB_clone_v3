@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             # isolate and validate <command>
             _cmd = pline[pline.find('.') + 1:pline.find('(')]
             if _cmd not in HBNBCommand.dot_cmds:
-                raise(Exception)
+                raise (Exception)
 
             # if parantheses contain arguments, parse them
             pline = pline[pline.find('(') + 1:pline.find(')')]
@@ -241,7 +241,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             for k, v in storage.all(eval(args)).items():
-                #if k.split('.')[0] == args:
+                # if k.split('.')[0] == args:
                 print_list.append(str(v))
         else:
             for v in storage.all().values():
@@ -261,7 +261,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         for k, v in storage.all(eval(args)).items():
-            #if args == k.split('.')[0]:
+            # if args == k.split('.')[0]:
             count += 1
         print(count)
 

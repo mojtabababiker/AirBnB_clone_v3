@@ -51,7 +51,7 @@ def users_del_user(user_id):
 
 
 @app_views.route('/users', strict_slashes=False,
-                methods=["POST"])
+                 methods=["POST"])
 def users_set_user():
     """
     API route to set a new instance of user

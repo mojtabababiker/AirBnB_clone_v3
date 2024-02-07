@@ -89,7 +89,7 @@ def reviews_set_place_review(place_id):
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
-               methods=["PUT"])
+                 methods=["PUT"])
 def reviews_update_review(review_id):
     """
     API route to update a review instance from the database under

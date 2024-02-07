@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/states', strict_slashes=False)
+@app_views.route('/states', strict_slashes=False)
 def states_get_all():
     """
     API route returns the all instances of states on
@@ -45,7 +45,7 @@ def states_set_new():
     return jsonify(state.to_dict()), 201
 
 
-@app_views.get('/states/<state_id>', strict_slashes=False)
+@app_views.route('/states/<state_id>', strict_slashes=False)
 def states_get_state(state_id):
     """
     API route get an instance of states from
@@ -74,7 +74,7 @@ def states_del_state(state_id):
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
-               methods=["PUT"])
+                 methods=["PUT"])
 def states_update_state(state_id):
     """
     API route set a new instance of states to

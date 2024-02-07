@@ -42,7 +42,7 @@ def cities_get_city(city_id):
 
 
 @app_views.route('/cities/<city_id>', strict_slashes=False,
-                  methods=["DELETE"])
+                 methods=["DELETE"])
 def cities_delete_city(city_id):
     """
     API route to delete city instance from the database
@@ -85,7 +85,7 @@ def cities_set_state_city(state_id):
 
 
 @app_views.route('/cities/<city_id>', strict_slashes=False,
-               methods=["PUT"])
+                 methods=["PUT"])
 def cities_update_city(city_id):
     """
     API route to update a city instance from the database under
