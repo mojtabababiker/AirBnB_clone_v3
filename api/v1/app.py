@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 API app model, version 1
+this module contains the API app instance and configure it
+to be able to server all our routes
 """
 from api.v1.views import app_views
 from flask import Flask, jsonify
@@ -16,7 +18,8 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def close_session(err=None):
     """Handle the request teardown, and call storage.close()
-       in each one"""
+       in each one
+    """
     try:
         storage.close()
     except Exception:
@@ -26,7 +29,8 @@ def close_session(err=None):
 @app.errorhandler(404)
 def handle_404(err=None):
     """
-    Handle the 404 error for the API
+    Handle the 404 error for the API, and returning
+    the error message on json format
     """
     return jsonify({"error": "Not found"}), 404
 
