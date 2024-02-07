@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 """
 API /amenities route for version v1
@@ -6,7 +7,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/amenities', strict_slashes=False)
+@app_views.route('/amenities', strict_slashes=False)
 def amenities_get_all():
     """
     API route to retrive all amenities instances from database
@@ -20,7 +21,7 @@ def amenities_get_all():
     return jsonify(amenities_list)
 
 
-@app_views.get('/amenities/<amenity_id>', strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False)
 def amenities_get_amenity(amenity_id):
     """
     API route to rerive amenity instance from database with
@@ -34,7 +35,8 @@ def amenities_get_amenity(amenity_id):
     return jsonify(amenity.to_dict())
 
 
-@app_views.delete('/amenities/<amenity_id>', strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
+                 methods=["DELETE"])
 def amenities_del_amenity(amenity_id):
     """
     API route to delete amenity instance from database with
@@ -48,7 +50,8 @@ def amenities_del_amenity(amenity_id):
     return jsonify(dict())
 
 
-@app_views.post('/amenities', strict_slashes=False)
+@app_views.route('/amenities', strict_slashes=False,
+                methods=["POST"])
 def amenities_set_amenity():
     """
     API route to set a new instance of amenity
@@ -69,7 +72,8 @@ def amenities_set_amenity():
     return jsonify(amenity.to_dict()), 201
 
 
-@app_views.put('/amenities/<amenity_id>', strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
+                 methods=["PUT"])
 def amenities_update_amenity(amenity_id):
     """
     API route to update amenity instance on the database with

@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/cities/<city_id>/places', strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', strict_slashes=False)
 def places_get_city_places(city_id):
     """
     API route to retrive all places instance on the city with
@@ -25,7 +25,7 @@ def places_get_city_places(city_id):
     return jsonify(places_list)
 
 
-@app_views.get('/places/<place_id>',  strict_slashes=False)
+@app_views.route('/places/<place_id>',  strict_slashes=False)
 def places_get_place(place_id):
     """
     API to retirve a place instance from the database with
@@ -39,7 +39,8 @@ def places_get_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.delete('/places/<place_id>', strict_slashes=False)
+@app_views.route('/places/<place_id>', strict_slashes=False,
+                 methods=["DELETE"])
 def places_del_place(place_id):
     """
     API to delete a place instance from the database with
@@ -54,7 +55,8 @@ def places_del_place(place_id):
     return jsonify(dict())
 
 
-@app_views.post('/cities/<city_id>/places', strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', strict_slashes=False,
+                 methods=["POST"])
 def places_set_city_places(city_id):
     """
     API route to add a new place instance on the city with
@@ -83,7 +85,8 @@ def places_set_city_places(city_id):
     return jsonify(place.to_dict()), 201
 
 
-@app_views.put('/places/<place_id>', strict_slashes=False)
+@app_views.route('/places/<place_id>', strict_slashes=False,
+               methods=["PUT"])
 def places_update_place(place_id):
     """
     API route to update place instance with

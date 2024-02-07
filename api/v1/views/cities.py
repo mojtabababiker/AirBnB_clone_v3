@@ -7,7 +7,8 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/states/<state_id>/cities', strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', strict_slashes=False,
+                 methods=["GET"])
 def cities_by_state(state_id):
     """
     API route to retirve all cities instance that belong to
@@ -25,7 +26,8 @@ def cities_by_state(state_id):
     return jsonify(cities_list)
 
 
-@app_views.get('/cities/<city_id>', strict_slashes=False)
+@app_views.route('/cities/<city_id>', strict_slashes=False,
+                 methods=["GET"])
 def cities_get_city(city_id):
     """
     API route to retrive city instance from the database
@@ -39,7 +41,8 @@ def cities_get_city(city_id):
     return jsonify(city.to_dict())
 
 
-@app_views.delete('/cities/<city_id>', strict_slashes=False)
+@app_views.route('/cities/<city_id>', strict_slashes=False,
+                  methods=["DELETE"])
 def cities_delete_city(city_id):
     """
     API route to delete city instance from the database
@@ -53,7 +56,8 @@ def cities_delete_city(city_id):
     return jsonify(dict()), 200
 
 
-@app_views.post('/states/<state_id>/cities', strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', strict_slashes=False,
+                 methods=["POST"])
 def cities_set_state_city(state_id):
     """
     API route to set a new city instance to the database under
@@ -80,7 +84,8 @@ def cities_set_state_city(state_id):
     return jsonify(city.to_dict()), 201
 
 
-@app_views.put('/cities/<city_id>', strict_slashes=False)
+@app_views.route('/cities/<city_id>', strict_slashes=False,
+               methods=["PUT"])
 def cities_update_city(city_id):
     """
     API route to update a city instance from the database under

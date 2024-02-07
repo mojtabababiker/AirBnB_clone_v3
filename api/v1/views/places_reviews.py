@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/places/<place_id>/reviews', strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', strict_slashes=False)
 def reviews_by_place(place_id):
     """
     API route to retirve all reviews instance that belong to
@@ -25,7 +25,7 @@ def reviews_by_place(place_id):
     return jsonify(reviews_list)
 
 
-@app_views.get('/reviews/<review_id>', strict_slashes=False)
+@app_views.route('/reviews/<review_id>', strict_slashes=False)
 def reviews_get_review(review_id):
     """
     API route to retrive review instance from the database
@@ -39,7 +39,8 @@ def reviews_get_review(review_id):
     return jsonify(review.to_dict())
 
 
-@app_views.delete('/reviews/<review_id>', strict_slashes=False)
+@app_views.route('/reviews/<review_id>', strict_slashes=False,
+                 methods=["DELETE"])
 def reviews_delete_review(review_id):
     """
     API route to delete review instance from the database
@@ -53,7 +54,8 @@ def reviews_delete_review(review_id):
     return jsonify(dict()), 200
 
 
-@app_views.post('/places/<place_id>/reviews', strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', strict_slashes=False,
+                 methods=["POST"])
 def reviews_set_place_review(place_id):
     """
     API route to set a new review instance to the database under
@@ -86,7 +88,8 @@ def reviews_set_place_review(place_id):
     return jsonify(review.to_dict()), 201
 
 
-@app_views.put('/reviews/<review_id>', strict_slashes=False)
+@app_views.route('/reviews/<review_id>', strict_slashes=False,
+               methods=["PUT"])
 def reviews_update_review(review_id):
     """
     API route to update a review instance from the database under

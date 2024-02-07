@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.get('/users', strict_slashes=False)
+@app_views.route('/users', strict_slashes=False)
 def users_get_all():
     """
     API route to retrive all users instances from database
@@ -21,7 +21,7 @@ def users_get_all():
     return jsonify(users_list)
 
 
-@app_views.get('/users/<user_id>', strict_slashes=False)
+@app_views.route('/users/<user_id>', strict_slashes=False)
 def users_get_user(user_id):
     """
     API route to rerive user instance from database with
@@ -35,7 +35,8 @@ def users_get_user(user_id):
     return jsonify(user.to_dict())
 
 
-@app_views.delete('/users/<user_id>', strict_slashes=False)
+@app_views.route('/users/<user_id>', strict_slashes=False,
+                 methods=["DELETE"])
 def users_del_user(user_id):
     """
     API route to delete user instance from database with
@@ -49,7 +50,8 @@ def users_del_user(user_id):
     return jsonify(dict())
 
 
-@app_views.post('/users', strict_slashes=False)
+@app_views.route('/users', strict_slashes=False,
+                methods=["POST"])
 def users_set_user():
     """
     API route to set a new instance of user
@@ -72,7 +74,8 @@ def users_set_user():
     return jsonify(user.to_dict()), 201
 
 
-@app_views.put('/users/<user_id>', strict_slashes=False)
+@app_views.route('/users/<user_id>', strict_slashes=False,
+                 methods=["PUT"])
 def users_update_user(user_id):
     """
     API route to update user instance on the database with

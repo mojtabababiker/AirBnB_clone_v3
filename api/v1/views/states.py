@@ -22,7 +22,8 @@ def states_get_all():
     return jsonify(states)
 
 
-@app_views.post('/states', strict_slashes=False)
+@app_views.route('/states', strict_slashes=False,
+                 methods=["POST"])
 def states_set_new():
     """
     API route set a new instance of states to
@@ -57,7 +58,8 @@ def states_get_state(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.delete('/states/<state_id>', strict_slashes=False)
+@app_views.route('/states/<state_id>', strict_slashes=False,
+                 methods=["DELETE"])
 def states_del_state(state_id):
     """
     API route get an instance of states from
@@ -71,7 +73,8 @@ def states_del_state(state_id):
     return jsonify(dict())
 
 
-@app_views.put('/states/<state_id>', strict_slashes=False)
+@app_views.route('/states/<state_id>', strict_slashes=False,
+               methods=["PUT"])
 def states_update_state(state_id):
     """
     API route set a new instance of states to
