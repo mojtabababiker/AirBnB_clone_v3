@@ -3,7 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -220,7 +220,8 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            obj = storage.all()[key]
+            obj.delete()
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -347,9 +348,11 @@ class HBNBCommand(cmd.Cmd):
                     att_val = HBNBCommand.types[att_name](att_val)
 
                 # update dictionary with name, value pair
-                new_dict.__dict__.update({att_name: att_val})
+                setattr(new_dict, att_name, att_val)
+                # new_dict.__dict__.update({att_name: att_val})
 
         new_dict.save()  # save updates to file
+        storage.close()
 
     def help_update(self):
         """ Help information for the update class """

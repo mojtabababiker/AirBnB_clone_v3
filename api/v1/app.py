@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-API app model, version 1
+"""API app model, version 1
 this module contains the API app instance and configure it
 to be able to server all our routes
 """
@@ -36,6 +35,10 @@ def handle_404(err=None):
 
 
 if __name__ == "__main__":
+    """If we this module called directly run it on
+    the provided host and port, 
+    default to 0.0.0.0:5000
+    """
     host = getenv('HBNB_API_HOST', '0.0.0.0')
     port = getenv('HBNB_API_PORT', '5000')
     app.run(host=host, port=port, threaded=True)
